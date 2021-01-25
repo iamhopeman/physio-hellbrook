@@ -1,0 +1,758 @@
+
+//screen sizes
+$maxWidth: 1440px;
+$biggerScreen: 960px;
+$breakTablet: 768px;
+$smallerScreen: 620px;
+
+//font
+$fontSize: 17px;
+
+
+//color
+$fontColor: #000;
+$fontBlue: #006AA9;
+$lightBlue: #73A9CA;
+$coral: #83AEC1;
+$lightCoral: #E7F0F6;
+$darkCoral: #C0D7E6;
+$footerTriangle: #99BCD3;
+// reset
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+//base
+
+p {
+  color: $fontColor;
+  + .button, + .footer__link {
+    margin-top: 1vh;
+  }
+  + p {
+    margin-top: .5em;
+  }
+  + {
+    h1, h2, h3, h4, h5 {
+      margin-top: 1.5em;
+    }
+  }
+}
+
+h1 + {
+  h2 {
+    margin-top: 2em;
+  }
+}
+.align-right {
+  text-align: right;
+}
+.align-center {
+  text-align: center;
+}
+
+body {
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: $fontSize;
+  line-height: 150%;
+  @media all and (max-width: $breakTablet) {
+    font-size: .9em;
+  }
+}
+
+a {
+  color: $fontBlue;
+}
+
+h1, h2, h3, h4, h5 ,h5 {
+  color: $fontBlue;
+  line-height: 120%;
+  + p {
+    margin-top: 2vh;
+  }
+}
+
+h1 {
+  @media all and (max-width: $breakTablet) {
+    font-size: 1.6em;
+  }
+}
+
+h2 {
+  font-weight: 600;
+  @media all and (max-width: $breakTablet) {
+    font-size: 1.5em;
+  }
+}
+
+//margin
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+//button
+
+a.nav__link, a.button, a.footer__link {
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  color: $fontBlue;
+  font-weight: 600;
+  display: inline-block;
+  &:before, &:after {
+    content:"";
+    width: 0;
+    height: 1px;
+    position: absolute;
+    transition: all 0.2s linear;
+    background: $fontBlue;
+    transition-delay: .2s;
+  }
+  &:before {
+    right: 0;
+    top: 0;
+  }
+  &:after {
+    left: 0;
+    bottom: 0;
+  }
+  &:hover, &.active {
+    &:before, &:after {
+      width: 100%;
+      transition-delay: 0s;
+    }
+    span:before, span:after {
+      height: 100%;
+      transition-delay: .2s;
+    }
+  }
+  span {
+    display: block;
+    padding: 10px 15px;
+    &:before, &:after {
+      content:"";
+      width: 1px;
+      height: 0;
+      position: absolute;
+      transition: all 0.2s linear;
+      background: $fontBlue;
+      transition-delay: 0s;
+    }
+    &:before {
+      left: 0;
+      top: 0;
+    }
+    &:after {
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+
+.grid-2 {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  @media all and (max-width: $breakTablet) {
+    flex-direction: column;
+  }
+  > .col {
+    width: 49%;
+    @media all and (max-width: $breakTablet) {
+      width: 100%;
+      + .col {
+        margin-top: 2vh;
+      }
+    }
+  }
+}
+
+.layout {
+  max-width: $maxWidth;
+  @media all and (min-width: $maxWidth) {
+    margin: 0 auto;
+    box-shadow: -10px 0px 13px -7px rgba(0,0,0,0.15), 10px 0px 13px -7px rgba(0,0,0,0.15), 0px 0px 5px 0px rgba(0,0,0,0);
+  }
+}
+
+.bg-dots {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 50%;
+    overflow: visible;
+    z-index: -1;
+    width: 100%;
+    height: 130%;
+    right: -7%;
+    transform: translateY(-50%);
+    background: right / auto 550px url(../assets/img/pattern.svg) no-repeat;
+  }
+  &--left {
+    &:after {
+      right: auto;
+      left: 0;
+      background: left bottom / auto 200px url(../assets/img/pattern--white.svg) no-repeat;
+      bottom: 0;
+      top: auto;
+      transform: unset;
+    }
+  }
+}
+header {
+  margin-bottom: 2vh;
+}
+.hero {
+  position: relative;
+  max-height: 500px;
+  //overflow: hidden;
+  clip-path: polygon(0 0, 0 100%, 100% 80%, 100% 0);
+  &__img {
+    &::before {
+      content: '';
+      opacity: .58;
+      display: block;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      background: $fontBlue;
+    }
+    &:after {
+      content: '';
+      background: $lightBlue;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      clip-path: polygon(0 95%, 0 100%, 100% 80%, 100% 80%);
+    }
+    img {
+      width: 100%;
+      object-fit: cover;
+      min-height: 150px;
+      max-height: 400px;
+    }
+  }
+    
+  a.hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-size: 2.3em;
+    font-weight: 600;
+    line-height: 120%;
+    text-decoration: none;
+    clip-path: none;
+    @media all and (max-width: $breakTablet) {
+      font-size: 1.5em;
+    }
+  }
+  .phone {
+    position: absolute;
+    bottom: 20%;
+    left: 7%;
+    @media all and (max-width: $breakTablet) {
+      bottom: 10%;
+    }
+    a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5em;
+      font-weight: 500;
+      opacity: .85;
+      filter: drop-shadow(2px 1px 4px rgba(0, 0, 0, 0.4));
+      @media all and (max-width: $biggerScreen) {
+        font-size: 0;
+      }
+      transition: transform .1s, opacity .2s;
+      &:hover, &:focus &:active {
+        transform: scale(1.03);
+        opacity: 1;
+      }
+      &:before {
+        content: url(../assets/img/icon-phone.svg);
+        display: inline-block;
+        vertical-align: middle;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+.open-nav {
+  display: block;
+  position: fixed;
+  right: 20px;
+  top: 10px;
+  z-index: 101;
+  height: 30px;
+  width: 30px;
+  &:before {
+    content:'';
+    position: absolute;
+    width: 90px;
+    height: 80px;
+    background: $lightCoral;
+    transform: translate(-30px, -30px);
+    border-radius: 0 0 0 50%;
+    box-shadow: 0 0 15px rgba(0,0,0,.3);
+    
+  }
+  cursor: pointer;
+  > span {
+    background-color: $fontBlue;
+    border-radius: 1px;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -1px 0 0 -15px;
+    transition: height 100ms;
+    &:before, &:after {
+      content: '';
+      background-color: $fontBlue;
+      border-radius: 1px;
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      left: 50%;
+      margin-left: -15px;
+      transition: all 200ms;
+    }
+    &:before {
+      top: -7px;
+    }
+    &:after {
+      bottom: -7px;
+    }
+  }
+  @media all and (min-width: $biggerScreen) {
+    display: none;
+  }
+  &.act {
+    span {
+      height: 0;
+      &:before, &:after {
+        top: 1px;
+      }
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+.nav {
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 100;
+  overflow: hidden;
+  @media all and (max-width: $biggerScreen) {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+  }
+  ul {
+    @media all and (max-width: $biggerScreen) {
+      opacity: 0;
+      height: 0;
+      transform: translateY(-100%);
+      background: $coral;
+      transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+    }
+    li {
+      text-align: center;
+    }
+  }
+  &.act {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    overflow: visible;
+    ul {
+      display: block;
+      height: 100%;
+      padding: 50px 0;
+      opacity: 1;
+      transform: translateY(0);
+      box-shadow: 0 0 15px rgba(black,.5);
+      transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+      .nav__home {
+        text-decoration: none;
+        font-weight: 600;
+        &:after{
+          content: "  Startseite";
+          text-decoration: none;
+        }
+      }
+      li + li {
+        padding-top: 20px;
+      }
+    }
+  }
+
+  @media all and (min-width: $biggerScreen) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 86%;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(-100%);
+    &__home {
+      opacity: .7;
+      transform: translateY(4px);
+      display: inline-block;
+      &:hover, &:active, &.active--exact, &:focus {
+        opacity: 1;
+      }
+    }
+    ul {
+      li {
+        display: inline-block;
+        .nav__link {
+          &.active {
+            text-shadow: 1px 0 0 $fontBlue;
+          }
+        }
+        &:nth-child(1n+2) {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+.inner > * {
+  width: 86%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hours {
+  margin-top: 50px;
+  @media all and (max-width: $breakTablet) {
+    margin-top: 0;
+  }
+  * + table {
+    margin-top: 1vh;
+  }
+  table {
+    @media all and (max-width: $breakTablet) {
+      margin: 0 auto;
+    }
+    text-align: left;
+    td + td, th + th {
+      padding-left: 20px;
+    }
+    th {
+      font-weight: bold;
+    }
+  }
+}
+
+.intro {
+  .col2 {
+    .text {
+      @media all and (max-width: $breakTablet) {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.praxis-slider {
+  position: relative;
+  width: 100%;
+  padding: 2vh 0 10vh;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $lightCoral;
+    background: linear-gradient($lightCoral , $darkCoral);
+    z-index: -1;
+    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 35%);
+  }
+
+  .slick-slider {
+    .slick-next, .slick-prev {
+      &:before {
+        content: url(../assets/img/icon-arrow--right.svg);
+        display: block;
+      }
+    }
+    .slick-prev {
+      &:before {
+        transform: rotate(180deg);
+      }
+    }
+    .slick-slide {
+      img {
+        margin: 0 auto;
+        box-shadow: 0 0 6px rgba(0,0,0,.15);
+      }
+    }
+  }
+}
+
+.team {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  @media all and (max-width: $smallerScreen) {
+    flex-direction: column;
+    align-items: center;
+  }
+  // gap: 20px;
+  .card {
+    max-width: 200px;
+    min-width: 130px;
+    flex-basis: calc(100% / 3);
+    text-align: center;
+    @media all and (max-width: $smallerScreen) {
+      &:nth-child(1n + 2) {
+        margin-top: 20px;
+      }
+    }
+
+    .img {
+      margin: 0 auto;
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+      position: relative;
+      overflow: hidden;
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background: $coral;
+      }
+      .placeholder {
+        position: relative;
+        width: 56px;
+        height: 22px;
+        border-radius: 15px 15px 5px 5px;
+        background: $darkCoral;
+        // margin-top: 29px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -25%);
+        &:before {
+          content: '';
+          display: block;
+          width: 26px;
+          height: 29px;
+          background: $darkCoral;
+          box-shadow: 0 0 0 2px $coral;
+          position: absolute;
+          border-radius: 50%;
+          left: 0;
+          top: 0;
+          transform: translate(15px, -85%);
+        }
+      }
+    }
+    .name {
+      font-weight: bold;
+    }
+    .title {
+      font-size: .8em;
+      line-height: 100%;
+    }
+  }
+}
+
+.footer-triangle {
+    height: 30vh;
+    width: 100%;
+    background: $darkCoral;
+    position: relative;
+    overflow: hidden;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: $coral;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(0 100%, 0 100%, 100% 0, 100% 100%);
+      &:before {
+        content: '';
+        clip-path: polygon(0 100%, 0 100%, 100% 0, 100% 20%);
+        background: $footerTriangle;
+        height: 100%;
+        width: 100%;
+        display: block;
+        
+      }
+    }
+}
+
+//Therapien
+
+.therapies {
+  ul {
+    display: inline-flex;
+    flex-wrap: wrap;
+    // gap: 20px;
+    li {
+      flex-basis: 100%;
+      padding: 20px 20px;
+      display: inline-block;
+      background: $darkCoral;
+      margin-top: 20px;
+      @media all and (min-width: $smallerScreen) {
+        flex-basis: calc(100% / 2 - 10px);
+        &:nth-child(1), &:nth-child(2) {
+          margin-top: 0;
+        }
+        &:nth-child(2n + 2) {
+          margin-left: 20px;
+        }
+        &:nth-child(2n + 3) {
+          margin-top: 20px;
+        }
+        &:nth-child(2n + 4) {
+          margin-top: 20px;
+        }
+      }
+      @media all and (min-width: $biggerScreen) {
+        flex-basis: calc(100% / 3 - 13.33px);
+        &:nth-child(3) {
+          margin-top: 0;
+        }
+        &:nth-child(2n + 2) {
+          margin-left: 0;
+        }
+        &:nth-child(2n + 3) {
+          margin-top: 0;
+        }
+        &:nth-child(2n + 4) {
+          margin-top: 0;
+        }
+        &:nth-child(1n + 4) {
+          margin-top: 20px;
+        }
+        &:nth-child(1n + 2) {
+          margin-left: 20px;
+        }
+        &:nth-child(3n + 4) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+footer {
+  z-index: 1;
+  position: relative;
+  background: $coral;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 600;
+  padding-bottom: 40px;
+  @media all and (max-width: $smallerScreen) {
+    text-align: center;
+  }
+  p {
+    color: white;
+  }
+  .footer__link {
+    color: #fff;
+    &:before, &:after {
+      background: #fff;
+    }
+    span:before, span:after {
+      background: #fff;
+    }
+  }
+  .copyright {
+    font-size: 1.5em;
+    color: $lightCoral;
+    font-weight: 500;
+  }
+  .grid-2 {
+    display: flex;
+    flex-direction: row;
+    @media all and (max-width: $smallerScreen) {
+      flex-direction: column;
+    }
+    > .col {
+      padding: 20px 20px 0;
+      + .col {
+        margin-top: 0;
+      }
+    }
+    .col1 {
+      text-align: right;
+      @media all and (max-width: $smallerScreen) {
+        text-align: inherit;
+      }
+    }
+    .col2 {
+      text-align: left;
+      @media all and (max-width: $smallerScreen) {
+        text-align: inherit;
+      }
+    }
+  }
+}
+
+//slider
+.splide {
+  &__slide {
+    text-align: center;
+  }
+}
+button.splide__arrow {
+  border-radius: unset;
+  background: none;
+  height: 30px;
+  width: 30px;
+  opacity: 1;
+  &--prev {
+    left: -30px;
+  }
+  &--next {
+    right: -35px;
+  }
+  svg {
+    height: 30px;
+    width: 30px;
+  }
+  path {
+    fill: $coral;
+  }
+}
